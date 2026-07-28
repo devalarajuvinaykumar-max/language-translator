@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OmniTranslate AI - Multimodal Communication Platform</title>
+  
+  <meta name="description" content="Enterprise AI Multimodal Communication Platform supporting Text, Neural Voice, OCR Images, Documents, YouTube, Meetings, AI Chat, Engine Comparison, and Writing Assistant.">
+  
+  <link rel="stylesheet" href="frontend/css/style.css">
+  <link rel="stylesheet" href="frontend/css/components.css">
+  <link rel="stylesheet" href="frontend/css/themes.css">
+</head>
+<body>
+
+  <!-- Ambient Glowing Background Elements -->
+  <div class="bg-glow-orb-1"></div>
+  <div class="bg-glow-orb-2"></div>
+
+  <!-- Navbar Navigation -->
+  <nav class="navbar">
+    <div class="brand">
+      <div class="brand-icon">⚡</div>
+      <span>OmniTranslate AI</span>
+    </div>
+    <div class="nav-actions">
+      <div class="mode-badge"><span class="dot"></span> Neural AI Active</div>
+      <button class="icon-btn" id="themeToggleBtn" title="Toggle Light/Dark Theme">🌙 Dark</button>
+      <button class="icon-btn" id="dyslexiaToggleBtn" title="Toggle Dyslexia-Friendly Font">📖 Font</button>
+    </div>
+  </nav>
+
+  <main class="app-container">
+
+    <!-- Multimodal Navigation Tabs -->
+    <nav class="tabs-navigation">
+      <button class="tab-item active" data-tab="text-pane">💬 Text Studio</button>
+      <button class="tab-item" data-tab="speech-pane">🎙️ Speech Hub</button>
+      <button class="tab-item" data-tab="ocr-pane">🖼️ OCR Studio</button>
+      <button class="tab-item" data-tab="doc-pane">📄 Document Studio</button>
+      <button class="tab-item" data-tab="yt-pane">🎥 YouTube Studio</button>
+      <button class="tab-item" data-tab="meeting-pane">🎙️ Meeting Assistant</button>
+      <button class="tab-item" data-tab="chat-pane">🤖 AI Chat Translator</button>
+      <button class="tab-item" data-tab="compare-pane">⚖️ Engine Comparison</button>
+      <button class="tab-item" data-tab="writer-pane">✍️ AI Writing Assistant</button>
+      <button class="tab-item" data-tab="web-pane">🌐 Website Translator</button>
+      <button class="tab-item" data-tab="memory-pane">🧠 Translation Memory</button>
+      <button class="tab-item" data-tab="analytics-pane">📊 Analytics Dashboard</button>
+    </nav>
+
+    <!-- 1. Text & Context Workspace Pane -->
+    <div id="text-pane" class="workspace-pane">
+      <div class="workspace-grid">
+        
+        <!-- Source Input Card -->
+        <div class="card">
+          <div class="card-header">
+            <span class="card-title">📝 Source Input</span>
+            <div style="display: flex; gap: 6px;">
+              <span class="badge-pill" id="charCount">0 chars | 0 words</span>
+              <span class="badge-pill" id="detectedLangBadge">Auto-Detected: EN</span>
+            </div>
+          </div>
+
+          <div class="selectors-row" style="margin-bottom: 12px;">
+            <select id="sourceLang" class="styled-select" style="flex: 1;">
+              <option value="auto" selected>✨ Auto Detect</option>
+              <option value="en">English</option>
+              <option value="hi">Hindi (हिंदी)</option>
+              <option value="te">Telugu (తెలుగు)</option>
+              <option value="fr">French (Français)</option>
+              <option value="es">Spanish (Español)</option>
+              <option value="de">German (Deutsch)</option>
+              <option value="zh">Chinese (中文)</option>
+              <option value="ja">Japanese (日本語)</option>
+              <option value="ar">Arabic (العربية)</option>
+              <option value="ru">Russian (Русский)</option>
+              <option value="pt">Portuguese (Português)</option>
+              <option value="it">Italian (Italiano)</option>
+              <option value="ko">Korean (한국어)</option>
+            </select>
+            
+            <button id="swapBtn" class="swap-btn" title="Swap Languages">⇄</button>
+
+            <select id="targetLang" class="styled-select" style="flex: 1;">
+              <option value="hi" selected>Hindi (हिंदी)</option>
+              <option value="en">English</option>
+              <option value="te">Telugu (తెలుగు)</option>
+              <option value="fr">French (Français)</option>
+              <option value="es">Spanish (Español)</option>
+              <option value="de">German (Deutsch)</option>
+              <option value="zh">Chinese (中文)</option>
+              <option value="ja">Japanese (日本語)</option>
+              <option value="ar">Arabic (العربية)</option>
+              <option value="ru">Russian (Русский)</option>
+              <option value="pt">Portuguese (Português)</option>
+              <option value="it">Italian (Italiano)</option>
+              <option value="ko">Korean (한국어)</option>
+            </select>
+          </div>
+
+          <!-- Context & Tone Controls -->
+          <div class="selectors-row" style="margin-bottom: 12px;">
+            <select id="domainSelect" class="styled-select" style="flex: 1;">
+              <option value="general">🌐 General Domain</option>
+              <option value="business">💼 Business & Financial</option>
+              <option value="technical">💻 Technical & Code</option>
+              <option value="academic">🎓 Academic & Science</option>
+              <option value="casual">💬 Casual & Slang</option>
+            </select>
+
+            <select id="formalitySelect" class="styled-select" style="flex: 1;">
+              <option value="default">⚖️ Standard Tone</option>
+              <option value="formal">👔 Formal Tone</option>
+              <option value="informal">💬 Informal / Casual</option>
+            </select>
+          </div>
+
+          <textarea id="inputText" class="editor" placeholder="Type, paste, or speak text here... (Ctrl+Enter to translate)"></textarea>
+
+          <div class="audio-visualizer hidden" id="audioVisualizer">
+            <div class="wave-bar"></div>
+            <div class="wave-bar"></div>
+            <div class="wave-bar"></div>
+            <div class="wave-bar"></div>
+            <div class="wave-bar"></div>
+          </div>
+
+          <div class="card-actions">
+            <div style="display: flex; gap: 8px;">
+              <button class="btn-secondary" id="micBtn" title="Speak via Microphone">🎙️ Speak</button>
+              <button class="btn-secondary" id="speakSourceBtn" title="Listen Audio Playback">🔊 Listen</button>
+            </div>
+            <button id="translateBtn" class="btn-primary">✨ Translate</button>
+          </div>
+        </div>
+
+        <!-- Target Output Card -->
+        <div class="card">
+          <div class="card-header">
+            <span class="card-title">🎯 Translated Output</span>
+            <span class="badge-pill" id="emotionBadge">Tone: Neutral</span>
+          </div>
+
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+            <small style="color: var(--text-secondary);">Confidence Score: <b id="confidenceScore">98%</b></small>
+            <div style="display: flex; gap: 8px; align-items: center;">
+              <small>Speed:</small>
+              <select id="speechRateSelect" class="styled-select" style="padding: 2px 6px; font-size: 0.8rem;">
+                <option value="0.75">0.75x</option>
+                <option value="1.0" selected>1.0x (Normal)</option>
+                <option value="1.25">1.25x</option>
+                <option value="1.5">1.5x</option>
+              </select>
+            </div>
+          </div>
+          
+          <div class="confidence-bar-container" style="margin-bottom: 16px;">
+            <div id="confidenceBar" class="confidence-bar-fill" style="width: 98%;"></div>
+          </div>
+
+          <textarea id="outputText" class="editor" readonly placeholder="Translated text will appear here..."></textarea>
+
+          <div id="aiPhrasingBox" class="pills-row">
+            <div class="badge-pill">✨ Natural phrasing loaded</div>
+          </div>
+
+          <div class="card-actions">
+            <button class="btn-secondary" id="speakTargetBtn" title="Listen High-Quality Neural Audio">🔊 Listen Neural TTS</button>
+            <button id="copyBtn" class="btn-primary" style="background: var(--bg-secondary); border: 1px solid var(--border-color); color: var(--text-primary);">📋 Copy</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- 2. Speech Hub Pane -->
+    <div id="speech-pane" class="workspace-pane hidden">
+      <div class="card">
+        <h3>🎙️ Live Speech-to-Speech & Neural TTS Hub</h3>
+        <p style="color: var(--text-secondary); margin: 12px 0;">Real-time multilingual speech recognition, noise suppression, neural pronunciation for Hindi/Indian/Global languages, and voice controls.</p>
+        
+        <div class="selectors-row" style="margin-bottom: 20px; max-width: 600px; margin-left: auto; margin-right: auto;">
+          <select id="ttsVoiceSelect" class="styled-select" style="flex: 1;">
+            <option value="neural-female" selected>👧 Female Neural Voice (Native)</option>
+            <option value="neural-male">👦 Male Neural Voice (Native)</option>
+            <option value="ai-expressive">⚡ AI Expressive Tone</option>
+          </select>
+          <select id="noiseReductionSelect" class="styled-select" style="flex: 1;">
+            <option value="active" selected>🛡️ Active Noise Reduction: ON</option>
+            <option value="off">🛡️ Active Noise Reduction: OFF</option>
+          </select>
+        </div>
+
+        <div style="text-align: center; padding: 30px;">
+          <button class="btn-primary" style="font-size: 1.2rem; padding: 16px 32px;" onclick="document.getElementById('micBtn').click()">🎙️ Start Live Voice Conversation</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3. OCR Studio Pane -->
+    <div id="ocr-pane" class="workspace-pane hidden">
+      <div class="card">
+        <h3>🖼️ Image & Visual OCR Studio</h3>
+        <p style="color: var(--text-secondary); margin-bottom: 16px;">Extract and translate text from photos, posters, menus, invoices, passports, and signboards with image preprocessing.</p>
+        
+        <div class="file-dropzone" id="ocrDropzone">
+          <p style="font-size: 1.1rem; font-weight: 600;">📷 Click or drag an image here to scan</p>
+          <small style="color: var(--text-muted);">Supports PNG, JPG, WEBP, BMP</small>
+          <input type="file" id="ocrFileInput" accept="image/*" class="hidden">
+        </div>
+
+        <div id="ocrResultBox" class="hidden" style="margin-top: 24px;"></div>
+      </div>
+    </div>
+
+    <!-- 4. Document Studio Pane -->
+    <div id="doc-pane" class="workspace-pane hidden">
+      <div class="card">
+        <h3>📄 Document Translation Studio</h3>
+        <p style="color: var(--text-secondary); margin-bottom: 16px;">Translate PDF, DOCX, PPTX, Excel, EPUB, TXT, and Markdown files while maintaining layout and formatting.</p>
+        
+        <div class="file-dropzone" id="docDropzone">
+          <p style="font-size: 1.1rem; font-weight: 600;">📁 Drag and drop document file here</p>
+          <input type="file" id="docFileInput" accept=".pdf,.docx,.pptx,.txt,.md,.epub,.xlsx" class="hidden">
+        </div>
+
+        <div id="docResultBox" class="hidden" style="margin-top: 24px;"></div>
+      </div>
+    </div>
+
+    <!-- 5. YouTube Studio Pane -->
+    <div id="yt-pane" class="workspace-pane hidden">
+      <div class="card">
+        <h3>🎥 YouTube Video Translation Studio</h3>
+        <p style="color: var(--text-secondary); margin-bottom: 16px;">Extract transcripts, generate translated subtitles, export .SRT captions, and compile AI video summaries.</p>
+
+        <div style="display: flex; gap: 12px; margin-bottom: 16px;">
+          <input type="text" id="ytUrlInput" class="styled-input" style="flex: 1;" placeholder="https://www.youtube.com/watch?v=...">
+          <button id="ytTranslateBtn" class="btn-primary">Translate Video</button>
+        </div>
+
+        <div id="ytResultBox" class="hidden" style="margin-top: 16px;"></div>
+      </div>
+    </div>
+
+    <!-- 6. Meeting Assistant Pane -->
+    <div id="meeting-pane" class="workspace-pane hidden">
+      <div class="card">
+        <h3>🎙️ Meeting Assistant & Speaker Diarization</h3>
+        <p style="color: var(--text-secondary); margin-bottom: 16px;">Separate speakers, translate dialogues, detect emotions, and extract action items.</p>
+
+        <textarea id="meetingTranscriptInput" class="editor" placeholder="Alex: Welcome everyone to the quarterly review.&#10;Maria: The translation engine has achieved sub-38ms latency."></textarea>
+        
+        <div style="margin-top: 12px; text-align: right;">
+          <button id="processMeetingBtn" class="btn-primary">Analyze & Translate Meeting</button>
+        </div>
+
+        <div id="meetingResultBox" class="hidden" style="margin-top: 24px;"></div>
+      </div>
+    </div>
+
+    <!-- 7. AI Chat Translator Pane -->
+    <div id="chat-pane" class="workspace-pane hidden">
+      <div class="card">
+        <h3>🤖 AI Chat Translator Studio</h3>
+        <p style="color: var(--text-secondary); margin-bottom: 16px;">Real-time two-way messaging chat with instant bilingual translation.</p>
+
+        <div id="chatContainer" style="min-height: 200px; background: var(--bg-secondary); border-radius: var(--radius-md); padding: 16px; margin-bottom: 16px;">
+          <div style="margin-bottom: 12px;"><b>Partner (Hindi):</b> नमस्ते! आप कैसे हैं? <br/><small style="color: var(--accent-primary);">(Translated to English): Hello! How are you?</small></div>
+        </div>
+
+        <div style="display: flex; gap: 12px;">
+          <input type="text" id="chatInput" class="styled-input" style="flex: 1;" placeholder="Type your message in English...">
+          <button id="sendChatBtn" class="btn-primary">Send Message</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 8. Engine Comparison Matrix Pane -->
+    <div id="compare-pane" class="workspace-pane hidden">
+      <div class="card">
+        <h3>⚖️ Multi-Engine Translation Matrix</h3>
+        <p style="color: var(--text-secondary); margin-bottom: 16px;">Compare translations side-by-side across Google Translate, Omni Neural AI, and DeepL engines.</p>
+
+        <textarea id="compareInput" class="editor" placeholder="Type text to compare across translation engines..."></textarea>
+        
+        <div style="margin-top: 12px; margin-bottom: 20px; text-align: right;">
+          <button id="runCompareBtn" class="btn-primary">⚡ Compare Engines</button>
+        </div>
+
+        <div id="compareResultsGrid" class="hidden" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px;"></div>
+      </div>
+    </div>
+
+    <!-- 9. AI Writing Assistant Pane -->
+    <div id="writer-pane" class="workspace-pane hidden">
+      <div class="card">
+        <h3>✍️ AI Writing Assistant & Grammar Studio</h3>
+        <p style="color: var(--text-secondary); margin-bottom: 16px;">AI Grammar Checker, Text Simplifier, and Formal/Casual Rewriter.</p>
+
+        <textarea id="writerInput" class="editor" placeholder="Enter text to grammar check, simplify, or rewrite..."></textarea>
+        
+        <div style="display: flex; gap: 12px; margin: 16px 0;">
+          <button class="btn-secondary" onclick="runWriter('grammar')">✨ Grammar Check</button>
+          <button class="btn-secondary" onclick="runWriter('simplify')">💡 Simplify Text</button>
+          <button class="btn-secondary" onclick="runWriter('formal')">👔 Rewrite Formal</button>
+          <button class="btn-secondary" onclick="runWriter('casual')">💬 Rewrite Casual</button>
+        </div>
+
+        <div id="writerResultBox" class="hidden" style="margin-top: 16px; background: var(--bg-secondary); padding: 16px; border-radius: var(--radius-md);"></div>
+      </div>
+    </div>
+
+    <!-- 10. Website Translator Pane -->
+    <div id="web-pane" class="workspace-pane hidden">
+      <div class="card">
+        <h3>🌐 Webpage & URL Translator</h3>
+        <p style="color: var(--text-secondary); margin-bottom: 16px;">Translate complete webpages while preserving layout and style.</p>
+
+        <div style="display: flex; gap: 12px; margin-bottom: 16px;">
+          <input type="text" id="webUrlInput" class="styled-input" style="flex: 1;" placeholder="https://example.com">
+          <button id="translateWebBtn" class="btn-primary">Translate Webpage</button>
+        </div>
+
+        <div id="webResultBox" class="hidden" style="margin-top: 16px;"></div>
+      </div>
+    </div>
+
+    <!-- 11. Translation Memory Pane -->
+    <div id="memory-pane" class="workspace-pane hidden">
+      <div class="card">
+        <div class="card-header">
+          <h3>🧠 Translation Memory & Bookmarks</h3>
+          <div style="display: flex; gap: 8px;">
+            <input type="text" id="memorySearchInput" class="styled-input" placeholder="🔍 Search memory log..." style="padding: 6px 12px; font-size: 0.85rem;">
+            <button id="exportMemoryBtn" class="btn-secondary">📥 Export JSON</button>
+          </div>
+        </div>
+        <div id="memoryListBox" style="margin-top: 16px;"></div>
+      </div>
+    </div>
+
+    <!-- 12. Analytics Dashboard Pane -->
+    <div id="analytics-pane" class="workspace-pane hidden">
+      <div class="card">
+        <h3>📊 Analytics & Performance Metrics</h3>
+        <div id="analyticsContainer" style="margin-top: 16px;"></div>
+      </div>
+    </div>
+
+  </main>
+
+  <script src="frontend/js/app.js"></script>
+</body>
+</html>
